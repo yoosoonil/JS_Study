@@ -120,3 +120,29 @@ console.log(`value: ${text}, type: ${typeof text}`);// string으로 타입을 �
 text = '8' / '2';
 console.log(`value: ${text}, type: ${typeof text}`);
 console.log(text.charAt(0));
+
+// 비동기 좋아요기능 참고
+const likeBtns = document.querySelectorAll('.like-btn');
+// const likeIcon = document.querySelector('.like-icon');
+const reviewLike = function (e) {
+    axios({
+        method: 'get',
+        url: `/reviews/like/${e.target.dataset.reviewId}/`
+    })
+        .then(response => {
+            if (response.data.isLiked === true) {
+                e.target.children[0].classList.add('bi-hand-thumbs-up-fill');
+                e.target.children[0].classList.remove('bi-hand-thumbs-up');
+                e.target.classList.remove('btnW');
+            } else {
+                e.target.children[0].classList.add('bi-hand-thumbs-up');
+                e.target.children[0].classList.remove('bi-hand-thumbs-up-fill');
+                e.target.classList.add('btnW');
+            }
+            const likeCount = e.target.children[1]
+            likeCount.innerText = response.data.likeCount;
+        })
+}
+likeBtns.forEach(likeBtn => {
+    likeBtn.addEventListener('click', reviewLike);
+});
