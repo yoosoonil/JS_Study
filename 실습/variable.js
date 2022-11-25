@@ -5,15 +5,21 @@
 // use strict 선언함으로써, strict모드로 개발
 // JavaScript 엔진이 효율적으로 돌아감
 
-// 2. Variable
+// 2. Variable, rw(read/write)
 // 변수. 변경될 수 있는 값.
 // js에서 변수를 만들 때 let을 사용.
-
-let name = 'ellie';
-// let을 이용해서 name이라는 변수를 선언. 'ellie'라는 변수의 값을 할당.
+// let (added in ES6)
+let globalName = 'global name'; 
+{
+    let name = 'ellie';
+    // let을 이용해서 name이라는 변수를 선언. 'ellie'라는 변수의 값을 할당.
+    console.log(name);
+    name = 'Hello';
+    console.log(name);
+    console.log(globalName);
+}
 console.log(name);
-name = 'Hello';
-console.log(name);
+console.log(globalName);
 // 어플리케이션을 실행하게 되면
 // app에 메모리가 할당되어짐.
 // 이 메모리는 텅텅 비어있는 박스들.
@@ -37,14 +43,19 @@ console.log(name);
 age = 4;
 var age;
 
-// 3. Constants
+// 3. Constants, r(read only)
 // const는 값을 한번 할당하면 절대 바뀌지 않는다.
+
+const daysInWeek = 7;
+const maxNumber = 5;
+
+// Note!
+// Immutable data types: premitive types, frozen objects (i.e. object.freeze()) [데이터 타입을 절대 변경 못함]
+// Mutable data types: all objects by default are mutable in JS [자스에서 모든 객체는 변경이 가능함]
 // favor immutable data type always for a few reasons:
 // - security
 // - thread safety
 // - reduce human mistakes
-const daysInWeek = 7;
-const maxNumber = 5;
 
 // 4. Variable types
 // primitive, single item: number, string, boolean, null, undefined, symbol
@@ -121,28 +132,3 @@ text = '8' / '2';
 console.log(`value: ${text}, type: ${typeof text}`);
 console.log(text.charAt(0));
 
-// 비동기 좋아요기능 참고
-const likeBtns = document.querySelectorAll('.like-btn');
-// const likeIcon = document.querySelector('.like-icon');
-const reviewLike = function (e) {
-    axios({
-        method: 'get',
-        url: `/reviews/like/${e.target.dataset.reviewId}/`
-    })
-        .then(response => {
-            if (response.data.isLiked === true) {
-                e.target.children[0].classList.add('bi-hand-thumbs-up-fill');
-                e.target.children[0].classList.remove('bi-hand-thumbs-up');
-                e.target.classList.remove('btnW');
-            } else {
-                e.target.children[0].classList.add('bi-hand-thumbs-up');
-                e.target.children[0].classList.remove('bi-hand-thumbs-up-fill');
-                e.target.classList.add('btnW');
-            }
-            const likeCount = e.target.children[1]
-            likeCount.innerText = response.data.likeCount;
-        })
-}
-likeBtns.forEach(likeBtn => {
-    likeBtn.addEventListener('click', reviewLike);
-});
