@@ -14,3 +14,12 @@ console.log(1 * 1); // multiply
 console.log(5 % 2); // remainder
 console.log(2 ** 3); // exponentiation
 
+// 3. Increment and decrement operators
+let counter = 2;
+const preIncrement = ++counter;
+// counter = counter + 1;
+// preIncrement = counter;
+console.log(`preIncrement: ${preIncrement}, counter : ${counter}`)
+const postIncrement = counter++;
+// postIncrement = counter;
+// counter = counter + 1;
