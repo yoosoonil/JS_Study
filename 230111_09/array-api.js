@@ -40,3 +40,24 @@ const students = [
   new Student('D', 40, false, 66),
   new Student('E', 18, true, 88),
 ];
+
+// Q5. find a student with the score 90
+{
+  const result = students.find(function(student, index) {
+    return student.score === 90;
+  });
+  console.log(result);
+}
+
+// Q6. make an array of enrolled students
+{
+  const result = students.filter((student) => student.enrolled);
+  console.log(result);
+}
+
+// Q7. make an array containing only the students' scores
+// result should be: [45, 80, 90, 66, 88]
+{ // map -> mapping api
+  const result = students.map((student) => student.score);
+  console.log(result);
+}
