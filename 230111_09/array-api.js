@@ -61,3 +61,41 @@ const students = [
   const result = students.map((student) => student.score);
   console.log(result);
 }
+
+// Q8. check if there is a student with the score lower than 50
+{
+  console.clear();
+  // 어떤 한 항목이 조건에 맞으면 된다.
+  const result1 = students.some((student) => student.score < 50);
+  console.log(result1);
+
+  // 모든 항목이 조건에 맞아야 된다.
+  // '!'는 true를 false로, false를 true로 바꾼다.
+  const result2 = !students.every((student) => student.score >= 50);
+  console.log(result2);
+}
+
+// Q9. comput students' average score
+{
+  console.clear();
+  const result = students.reduce((prev, curr) => prev + curr.score, 0);
+  console.log(result/students.length); 
+  // return하는 값이 prev로 순차적으로 전달되어진다.
+}
+
+// Q10. make a string containing all the scores
+{
+  const result = students.map((student) => student.score).join();
+  console.log(result);
+}
+
+// Bonus! do Q10 sorted in ascending order
+// result should be: '45, 66, 80, 88, 90'
+{
+  // sort()라는 method는 오름차순으로 바꿔준다.
+  const result = students
+      .map((student) => student.score)
+      .sort((a, b) => b - a)
+      .join();
+  console.log(result);
+}
