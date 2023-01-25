@@ -2,6 +2,7 @@
 // clear style of using promise :)
 
 // 1. async
+// async라는 키워드르 쓰지 않을 때, promise 코드를 작성할 때, 지저분해진다.
 // function fetchUser() {
 //   return new Promise((resolve, reject) => {
 //     resolve("ellie");
@@ -9,14 +10,16 @@
 // }
 // async라는 키워드를 함수 앞에 사용하면 자동으로 promise로 바꿔준다.
 async function fetchUser() {
+  // fetchUser 함수는 ellie를 리턴한다.
   return "ellie";
 }
-const user = fetchUser();
+const user = fetchUser(); // 변수 user에 fetchUser 함수를 할당한다.
 user.then(console.log);
 console.log(user);
 
 // 2. await 🌟
 function delay(ms) {
+  //
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
